@@ -23,6 +23,14 @@ more for creating `shiny` applications.
 If you wish to contribute, please fork this project, make changes on branches,
 and create pull requests (PRs) to the main project page.
 
+```shell
+# To create a new branch
+git checkout -B new-branch
+
+# Step before a pull request, pushing updates to GitHub
+git push origin new-branch
+```
+
 Please try to write informative `git commit` messages. See [this
 page][goodcommit] for seven rules of a great Git commit message.
 

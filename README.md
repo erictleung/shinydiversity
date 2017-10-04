@@ -2,7 +2,7 @@
 
 Interactive application to explore various ecological diversity metrics
 
-# To Run
+## To Run
 
 ```
 # Install Shiny

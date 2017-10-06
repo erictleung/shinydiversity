@@ -7,7 +7,7 @@ Interactive application to explore various ecological diversity metrics
 
 ## To Run
 
-```
+```R
 # Install Shiny
 install.packages("shiny")
 

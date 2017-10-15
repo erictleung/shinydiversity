@@ -7,12 +7,19 @@ Contributions are welcome :smile:
 
 - [Shiny Applications](#shiny-applications)
 - [Making Changes](#making-changes)
+- [Pulling Updates](#pulling-updates)
+- [Reviewing Changes](#reviewing-changes)
 - [R Style](#r-style)
 
 ## Shiny Applications
 
 Take a look at RStudio's page for [`shiny`][shiny] for resources, examples, and
 more for creating `shiny` applications.
+
+Two places in particular that may be of interest are:
+
+- http://shiny.rstudio.com/tutorial/
+- http://shiny.rstudio.com/articles/
 
 [shiny]: http://shiny.rstudio.com/
 
@@ -35,6 +42,43 @@ Please try to write informative `git commit` messages. See [this
 page][goodcommit] for seven rules of a great Git commit message.
 
 [goodcommit]: https://chris.beams.io/posts/git-commit/
+
+## Pulling Updates
+
+**tl;dr** setup `upstream` remote to pull updates, ask for git help if needed
+
+Given you forked this repository, you can keep your fork up to date by setting
+up the main repository as an "upstream" git remote to update your changes.
+
+```shell
+# Setup upstream remote to pull updates from
+git remote add upstream https://github.com/erictleung/shinydiversity.git
+git remote -v # Should should you have two remotes, your fork and this repo
+
+# Pulling updates from original repository from your fork
+git pull --rebase upstream master
+```
+
+The last command should not give you any problems, so long as you do not make
+any changes to your local copy of the `master` branch.
+
+If you run into git trouble, you can try [Oh shit, git!][osg] for some honest
+answers. Otherwise, you can usually find an answer on StackOverflow. Feel free
+to comment in the issues, Slack page, or Gitter if run into issues.
+
+[osg]: http://ohshitgit.com/
+
+## Reviewing Changes
+
+When reviewing pull requests, please test the changes locally for non-trivial
+changes (e.g. user interface changes or new functionality).
+
+You can do so by using the [steps outlined here][prlocal]. To do this in a
+slightly more automated manner, you can modify the `.git/config` within your
+fork to do [branch creation and such][autoprpull].
+
+[prlocal]: https://help.github.com/articles/checking-out-pull-requests-locally/
+[autoprpull]: https://gist.github.com/piscisaureus/3342247
 
 ## R Style
 

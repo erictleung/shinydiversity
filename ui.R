@@ -1,25 +1,20 @@
-library(shiny)
+source("home/ui.R")
+source("alpha/ui.R")
+source("beta/ui.R")
 
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput(
-                "bins",
-                "Number of bins:",
-                min = 1,
-                max = 50,
-                value = 30
-        )
+ui <- navbarPage(
+    title = "ShinyDiversity",
+    inverse = TRUE,
+    tabPanel(
+        "Home",
+        homeUI("homeUI")
     ),
-
-    # Show a plot of the generated distribution
-    mainPanel(
-        plotOutput("distPlot"))
+    tabPanel(
+        "Alpha",
+        alphaUI("alphaUI")
+    ),
+    tabPanel(
+        "Beta",
+        betaUI("betaUI")
     )
-))
+)

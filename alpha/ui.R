@@ -15,16 +15,23 @@ alphaUI <- function(id) {
 
                 # Sidebar panel
                 sidebarPanel(
-                    # TODO: Sidebar panel UI logic here
+                    selectInput(
+                        inputId = ns("dataSelection"),
+                        label = "Choose a Dataset",
+                        choices = c("Global Patterns" = "global", "Esophagus" = "esophagus"),
+                        selected = "global"
+                    ),
+                    checkboxGroupInput(
+                        inputId = ns("groupSelection"),
+                        label = "Select Metrics",
+                        choiceNames = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher"),
+                        choiceValues = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher")
+                    )
                 ),
 
                 # Main panel
                 mainPanel(
-                    # TODO: Main  panel UI logic here
-                    #Roshan added
-                    selectInput(inputId = "dataSelection", label = "Choose a Dataset", multiple = FALSE, choices = c("GlobalPatterns", "esophagus"), selected = "GlobalPatterns"), 
-                    checkboxGroupInput(inputId = "groupSelection", label = "Select Metrics", choiceNames = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher"), choiceValues = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher")), 
-                    plotOutput(outputId = "phylo")
+                    plotOutput(outputId = ns("phylo"))
                 )
             )
         )

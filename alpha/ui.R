@@ -21,6 +21,10 @@ alphaUI <- function(id) {
                 # Main panel
                 mainPanel(
                     # TODO: Main  panel UI logic here
+                    #Roshan added
+                    selectInput(inputId = "dataSelection", label = "Choose a Dataset", multiple = FALSE, choices = c("GlobalPatterns", "esophagus"), selected = "GlobalPatterns"), 
+                    checkboxGroupInput(inputId = "groupSelection", label = "Select Metrics", choiceNames = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher"), choiceValues = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher")), 
+                    plotOutput(outputId = "phylo")
                 )
             )
         )

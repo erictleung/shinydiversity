@@ -1,9 +1,9 @@
 docsUI <- function(id) {
-    # Compile RMarkdown files
-    knit("docs/alpha.Rmd", "docs/alpha.md", quiet = TRUE)
-
     # Create a namespace function using the provided ID
     ns <- NS(id)
+
+    # Compile RMarkdown files
+    knit("docs/alpha.Rmd", "docs/alpha.md", quiet = TRUE)
 
     # Define the UI for the app
     tagList(

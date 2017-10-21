@@ -3,9 +3,10 @@ source("alpha/server.R")
 source("beta/server.R")
 source("docs/server.R")
 
-library(phyloseq)
 library(ggplot2)
 library(knitr)
+library(markdown)
+library(phyloseq)
 
 # Define server logic and return the server function
 server <- function(input, output) {

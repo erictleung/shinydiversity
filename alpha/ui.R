@@ -32,7 +32,10 @@ alphaUI <- function(id) {
                         label = "Choose a theme for the Plots",
                         choices = c("Grey theme", "Black & White theme","Classic theme"),
                         selected = "Grey theme"
-                    )
+                    ),
+                    sliderInput(inputId = ns("p"),
+                                label = "Choose a percentage to sparcify",
+                                value = 0.25, min = 0, max = 1)
                 ),
 
                 # Main panel

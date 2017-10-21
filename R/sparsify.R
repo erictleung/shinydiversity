@@ -9,7 +9,7 @@ replaceX <- function(vec, p) {
 
 sparsify <- function(otu_table, p) {
   # otu_table: columns are samples and rows are OTUs
-  # p: percent of random OTUs in a sample to replace with zeros. 
+  # p: percent of random OTUs in a sample to replace with zeros.
   df=apply(otu_table, MARGIN = 2, function(x) replaceX(x, p))
-  df
+  otu_table(df, taxa_are_rows = TRUE)
 }

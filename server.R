@@ -1,9 +1,14 @@
 source("home/server.R")
 source("alpha/server.R")
 source("beta/server.R")
+source("docs/server.R")
+
+library(ggplot2)
+library(knitr)
+library(markdown)
+library(phyloseq)
 
 library(phyloseq)
-library(ggplot2)
 
 # Define server logic and return the server function
 server <- function(input, output) {
@@ -12,4 +17,6 @@ server <- function(input, output) {
     alphaServer <- callModule(alphaServer, "alphaUI")
 
     betaServer <- callModule(betaServer, "betaUI")
+
+    docsServer <- callModule(docsServer, "docsUI")
 }

@@ -11,8 +11,8 @@ alphaServer <- function(input, output, session) {
 
         )
 
-
         theme_set(selected_theme)
+
         if (input$dataSelection == "global") {
             data("GlobalPatterns")
             plot_richness(GlobalPatterns, measures = c("Observed", input$groupSelection))

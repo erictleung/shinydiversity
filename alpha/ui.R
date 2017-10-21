@@ -26,6 +26,12 @@ alphaUI <- function(id) {
                         label = "Select Metrics",
                         choiceNames = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher"),
                         choiceValues = c("ACE", "Shannon", "Simpson", "InvSimpson", "Fisher")
+                    ),
+                    selectInput(
+                        inputId = ns("plotTheme"),
+                        label = "Choose a theme for the Plots",
+                        choices = c("Grey theme", "Black & White theme","Classic theme"),
+                        selected = "Grey theme"
                     )
                 ),
 

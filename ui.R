@@ -1,6 +1,7 @@
 source("home/ui.R")
 source("alpha/ui.R")
 source("beta/ui.R")
+source("docs/ui.R")
 
 ui <- navbarPage(
     title = "ShinyDiversity",
@@ -16,5 +17,9 @@ ui <- navbarPage(
     tabPanel(
         "Beta",
         betaUI("betaUI")
+    ),
+    tabPanel(
+        "Documentation",
+        docsUI("docsUI")
     )
 )

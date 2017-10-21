@@ -1,0 +1,86 @@
+---
+title: "Alpha Diversities"
+output: html_document
+---
+
+Below are descriptions of common diversity metrics and brief explanations on
+their use, along with some test calculations
+
+Minimal calculations of these metrics will be used with the `esophagus` data
+found in `phyloseq`.
+
+```{r}
+library(phyloseq)
+data("esophagus")
+```
+
+Observed
+========
+
+This diversity metric simply calculates the number of non-zero abundant taxa.
+
+```{r}
+# Use phyloseq function
+estimate_richness(esophagus, measures = "Observed")
+
+# Confirm with manual calculation
+esoTF <- otu_table(esophagus)
+colSums(esoTF != 0) # Non-zero taxa will be TRUE
+```
+
+Chao1
+=====
+
+According to original paper, the Chao1 metric is a
+
+> Nonparametric estimation of the number of classes in a population
+
+This metric is defined as
+
+$$S_{est} = S_{obs} + \frac{f_1^2}{2f_2}$$
+
+where
+
+- $S_{est}$ is the estimated number of species,
+- $S_{obs}$ is the observed number of species (i.e. number of non-zero taxa),
+- $f_1$ is the number of singletons (i.e. number of taxa occurring only once),
+  and
+- $f_2$ is the number of doubletons (i.e. number of taxa occurring only twice).
+
+The abstract of the original paper mentions that this metric estimates number of
+classes
+
+> ... when most of the information is concentrated on the low order occupancy
+> numbers. (Chao, 1984)
+
+So this implies you should use this metric if you believe there are low abundant
+taxa involved in your samples.
+
+The potential rationale for weighting more with singletons and doubletons is
+because if you have a lot of singletons, it may suggest that there are more
+unobserved taxa in your population. Thus, having a higher diversity.
+
+```{r}
+# Use phyloseq function
+estimate_richness(esophagus, measures = "Chao1")
+estimateR(t(otu_table(esophagus)), "chao")["S.chao1", ] # Function used in vegan
+
+# Confirm with manual calculation
+chao1 <- function(otu) {
+    temptable <- otu_table(otu)
+    singletons <- colSums(temptable == 1) # Number of singletons
+    doubletons <- colSums(temptable == 2) # Number of doubletons
+    obs <- colSums(temptable != 0) # Observed number of non-zero taxa
+    obs + (singletons * (singletons - 1)) / (2 * (doubletons + 1))
+}
+chao1(otu_table(esophagus))
+```
+
+**References**
+
+Chao, Anne. "Nonparametric estimation of the number of classes in a population." Scandinavian Journal of statistics (1984): 265-270. URL: http://www.jstor.org/stable/4615964
+
+Chao1 calculation in the `estimateR()` function within `vegan`
+URL: https://github.com/vegandevs/vegan/blob/master/R/estimateR.default.R
+
+Alpha Diversity http://www.coloss.org/beebook/I/gut-symbionts/2/2/4

@@ -60,6 +60,10 @@ The potential rationale for weighting more with singletons and doubletons is
 because if you have a lot of singletons, it may suggest that there are more
 unobserved taxa in your population. Thus, having a higher diversity.
 
+**Note**: The `vegan` implementation of the calculation adds in correction
+terms (the `+1` for the doubletons) in case there are no doubletons in your
+sample. Other wise, you'd be dividing by zero. 
+
 ```{r}
 # Use phyloseq function
 estimate_richness(esophagus, measures = "Chao1")
@@ -71,6 +75,8 @@ chao1 <- function(otu) {
     singletons <- colSums(temptable == 1) # Number of singletons
     doubletons <- colSums(temptable == 2) # Number of doubletons
     obs <- colSums(temptable != 0) # Observed number of non-zero taxa
+
+    # Chao1 calculation
     obs + (singletons * (singletons - 1)) / (2 * (doubletons + 1))
 }
 chao1(otu_table(esophagus))

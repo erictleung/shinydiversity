@@ -5,6 +5,7 @@ source("docs/server.R")
 
 library(phyloseq)
 library(ggplot2)
+library(knitr)
 
 # Define server logic and return the server function
 server <- function(input, output) {

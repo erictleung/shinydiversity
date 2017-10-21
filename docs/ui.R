@@ -1,10 +1,6 @@
-library(shiny)
-library(knitr)
-
 docsUI <- function(id) {
     # Compile RMarkdown files
-    rmdfiles <- c("docs/alpha.Rmd")
-    sapply(rmdfiles, knit, quiet = T)
+    knit("docs/alpha.Rmd", "docs/alpha.md", quiet = TRUE)
 
     # Create a namespace function using the provided ID
     ns <- NS(id)

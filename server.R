@@ -3,6 +3,7 @@ source("alpha/server.R")
 source("beta/server.R")
 
 library(phyloseq)
+library(ggplot2)
 
 # Define server logic and return the server function
 server <- function(input, output) {

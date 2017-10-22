@@ -1,12 +1,14 @@
-source("home/server.R")
-source("alpha/server.R")
-source("beta/server.R")
-source("docs/server.R")
-
 library(ggplot2)
 library(knitr)
 library(markdown)
 library(phyloseq)
+library(phyloseq); packageVersion("phyloseq")
+library(plyr)
+
+source("home/server.R")
+source("alpha/server.R")
+source("beta/server.R")
+source("docs/server.R")
 
 # Define server logic and return the server function
 server <- function(input, output) {

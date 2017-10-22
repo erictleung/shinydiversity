@@ -1,10 +1,6 @@
-# Reduce GlobalPattern dataset to only feces, skin, and tongue samples.   
-
-library("phyloseq"); packageVersion("phyloseq")
-
+# Reduce GlobalPattern dataset to only feces, skin, and tongue samples.
 data(GlobalPatterns)
 GP = GlobalPatterns
-library("plyr")
 human = get_variable(GP, "SampleType") %in% c("Feces", "Mock", "Skin", "Tongue")
 sample_data(GP)$human <- factor(human)
 

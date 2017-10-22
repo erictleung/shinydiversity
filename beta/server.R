@@ -1,21 +1,31 @@
-# Calling sparcify & helper functions
-source("R/sparsify.R")
+# Calling sparsify & helper functions
+source("beta/multiplot.R")
+source("beta/plotOrd.R")
+source("beta/rarefy.R")
+source("beta/sparsify.R")
 
 # Beta Module Server function
-
 betaServer <- function(input, output, session) {
-    # TODO: Put Server logic here
-     output$ord <- renderPlot({
-        multiplot(plotEuclidean, plotBray, plotJaccard)
+    #  output$ord <- renderPlot({
+    #      plotEuclidean <- plotOrd(GP3, distance = "euclidean", title = "euclidean_ord")
+    #      plotBray <- plotOrd(GP3, distance = "bray", title = "bray_ord")
+    #      plotJaccard <-  plotOrd(GP3, distance = "jaccard", title = "jaccard_ord")
+    #      multiplot(plotEuclidean, plotBray, plotJaccard)
+    # })
+
+    output$ord_euclidean_norm <- renderPlot({
+        normOTU <- rarefy(GP3, count = input$rarefyCount)
+        plot(plotOrd(normOTU, distance = "euclidean", title = "euclidean_norm"))
     })
 
-    output$ord_norm <- renderPlot({
-
+    output$ord_bray_norm <- renderPlot({
         normOTU <- rarefy(GP3, count = input$rarefyCount)
-        plotEuclidean_norm <- plotOrd(normOTU, distance = "euclidean", title = "euclidean_norm")
-        plotBray_norm <- plotOrd(normOTU, distance = "bray", title = "bray_norm")
-        plotJaccard_norm <-  plotOrd(normOTU, distance = "jaccard", title = "jaccard_norm")
-        multiplot(plotEuclidean_norm, plotBray_norm, plotJaccard_norm)
+        plot(plotOrd(normOTU, distance = "bray", title = "bray_norm"))
+    })
+
+    output$ord_jaccard_norm <- renderPlot({
+        normOTU <- rarefy(GP3, count = input$rarefyCount)
+        plot(plotOrd(normOTU, distance = "jaccard", title = "jaccard_norm"))
     })
 
     output$unifracWeighted <- renderPlot({

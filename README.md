@@ -8,7 +8,7 @@ Interactive application to explore various ecological diversity metrics
 **Table of Contents**
 
 - [To Run](#to-run)
-- [Prerequisites for Local Development](prerequisites-for-local-development)
+- [Prerequisites for Local Development](#prerequisites-for-local-development)
 - [Problem](#problem)
 - [Proposed Project](#proposed-project)
 

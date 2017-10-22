@@ -10,7 +10,7 @@ homeUI <- function(id) {
         fluidPage(
             titlePanel("Home"),
             fluidRow(
-                column(12, includeMarkdown("README.md"))
+                column(12, includeHTML(render("README.md", "html_document")))
             )
         )
     )

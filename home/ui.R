@@ -4,12 +4,13 @@ homeUI <- function(id) {
     ns <- NS(id)
 
     # NOTE: All referenced input variables must be wrapped with a call to ns(), ex. ns("someInputID")
+    render("README.md", output_format = "html_document", quiet = TRUE)
 
     # Define the UI for the app
     tagList(
         fluidPage(
             fluidRow(
-                column(12, includeHTML(render("README.md", "html_document")))
+                column(12, includeHTML("README.html"))
             )
         )
     )

@@ -2,6 +2,7 @@ library(ggplot2)
 library(knitr)
 library(markdown)
 library(phyloseq)
+library(rmarkdown)
 library(phyloseq); packageVersion("phyloseq")
 library(plyr)
 

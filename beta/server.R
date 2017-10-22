@@ -5,11 +5,24 @@ source("R/sparsify.R")
 
 betaServer <- function(input, output, session) {
     # TODO: Put Server logic here
-    output$plot <- renderPlot({
-        # TODO: code to plot data points
+     output$ord <- renderPlot({
+        multiplot(plotEuclidean, plotBray, plotJaccard)
+    })
 
-        # Demo code for slider:
-        title <- "Beta Diversity Metrics"
-        hist(rnorm(input$p*100), main = title)
-        })
+    output$ord_norm <- renderPlot({
+
+        normOTU <- rarefy(GP3, count = input$rarefyCount)
+        plotEuclidean_norm <- plotOrd(normOTU, distance = "euclidean", title = "euclidean_norm")
+        plotBray_norm <- plotOrd(normOTU, distance = "bray", title = "bray_norm")
+        plotJaccard_norm <-  plotOrd(normOTU, distance = "jaccard", title = "jaccard_norm")
+        multiplot(plotEuclidean_norm, plotBray_norm, plotJaccard_norm)
+    })
+
+    output$unifracWeighted <- renderPlot({
+        plotOrd(GP3, distance = "unifrac", title = "unifrac_Weighted", weighted = TRUE)
+    })
+
+    output$unifracUnWeighted <- renderPlot({
+        plotOrd(GP3, distance = "unifrac", title = "unifrac_Unweighted", weighted = FALSE)
+    })
 }

@@ -50,7 +50,7 @@ alphaUI <- function(id) {
                 selectInput(
                     inputId = ns("dataSelection"),
                     label = "Choose a Dataset",
-                    choices = c("Global Patterns" = "GlobalPatterns", "Esophagus" = "esophagus"), selected = "GlobalPatterns"),
+                    choices = c("Global Patterns" = "GlobalPatterns", "Esophagus" = "esophagus", "GP3" = "GP3"), selected = "GlobalPatterns"),
                 checkboxGroupInput(
                     inputId = ns("groupSelection"),
                     label = "Select Metrics",

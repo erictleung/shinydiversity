@@ -42,7 +42,8 @@ or microbiome data. Alpha diversity describes an estimate of the total number
 of species in a sample. Beta diversity describes the differences between
 samples. Below are some example of then number of metrics you can use.
 
-![Plot of seven different alpha diversity metrics](images/alpha_diversities.png)
+<img src="images/alpha_diversities.png" alt="Drawing" style="width: 100%;"/>
+
 ###### Plot from "Alpha diversity graphics" page for phyloseq showing various alpha diversity metrics to choose from http://joey711.github.io/phyloseq/plot_richness-examples
 
 Below is are just a few beta diversity metrics choose from

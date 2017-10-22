@@ -16,13 +16,18 @@ betaUI <- function(id) {
                 # Sidebar panel
                 sidebarPanel(
                     # TODO: Sidebar panel UI logic here
+                    sliderInput(inputId = ns("p"),
+                                label = "Choose a percentage to sparcify",
+                                value = 0.25, min = 0, max = 1)
                 ),
 
                 # Main panel
                 mainPanel(
                     # TODO: Main  panel UI logic here
+                    plotOutput(outputId = ns("plot")
                 )
             )
         )
+    )
     )
 }

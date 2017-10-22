@@ -1,15 +1,38 @@
-# Calling sparcify & helper functions
-source("R/sparsify.R")
+# Calling sparsify & helper functions
+source("beta/multiplot.R")
+source("beta/plotOrd.R")
+source("beta/rarefy.R")
+source("beta/sparsify.R")
 
 # Beta Module Server function
-
 betaServer <- function(input, output, session) {
-    # TODO: Put Server logic here
-    output$plot <- renderPlot({
-        # TODO: code to plot data points
+    #  output$ord <- renderPlot({
+    #      plotEuclidean <- plotOrd(GP3, distance = "euclidean", title = "euclidean_ord")
+    #      plotBray <- plotOrd(GP3, distance = "bray", title = "bray_ord")
+    #      plotJaccard <-  plotOrd(GP3, distance = "jaccard", title = "jaccard_ord")
+    #      multiplot(plotEuclidean, plotBray, plotJaccard)
+    # })
 
-        # Demo code for slider:
-        title <- "Beta Diversity Metrics"
-        hist(rnorm(input$p*100), main = title)
-        })
+    output$ord_euclidean_norm <- renderPlot({
+        normOTU <- rarefy(GP3, count = input$rarefyCount)
+        plot(plotOrd(normOTU, distance = "euclidean", title = "euclidean_norm"))
+    })
+
+    output$ord_bray_norm <- renderPlot({
+        normOTU <- rarefy(GP3, count = input$rarefyCount)
+        plot(plotOrd(normOTU, distance = "bray", title = "bray_norm"))
+    })
+
+    output$ord_jaccard_norm <- renderPlot({
+        normOTU <- rarefy(GP3, count = input$rarefyCount)
+        plot(plotOrd(normOTU, distance = "jaccard", title = "jaccard_norm"))
+    })
+
+    output$unifracWeighted <- renderPlot({
+        plotOrd(GP3, distance = "unifrac", title = "unifrac_Weighted", weighted = TRUE)
+    })
+
+    output$unifracUnWeighted <- renderPlot({
+        plotOrd(GP3, distance = "unifrac", title = "unifrac_Unweighted", weighted = FALSE)
+    })
 }

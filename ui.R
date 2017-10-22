@@ -20,10 +20,10 @@ ui <- navbarPage(
     ),
     navbarMenu("Documentation",
         tabPanel("Alpha",
-                 docsUI("docsUIalpha")
+                 docsUIalpha("docsUIalpha")
         ),
         tabPanel("Beta",
-                 docsUI("docsUIbeta"))
-
+                 docsUIbeta("docsUIbeta")
+        )
     )
 )

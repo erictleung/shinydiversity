@@ -7,27 +7,27 @@ betaUI <- function(id) {
 
     # Define the UI for the app
     tagList(
-        fluidPage(
-            titlePanel("Beta Diversiy"),
+        titlePanel("Beta Diversity Metrics"),
+        #plotOutput(outputId = ns("ord")),
 
-            # Sidebar layout
-            sidebarLayout(
-
-                # Sidebar panel
-                sidebarPanel(
-                    # TODO: Sidebar panel UI logic here
-                    sliderInput(inputId = ns("p"),
-                                label = "Choose a percentage to sparcify",
-                                value = 0.25, min = 0, max = 1)
-                ),
-
-                # Main panel
-                mainPanel(
-                    # TODO: Main  panel UI logic here
-                    plotOutput(outputId = ns("plot")
-                )
+        fluidRow(
+            column(4, plotOutput(outputId = ns("ord_euclidean_norm"))),
+            column(4, plotOutput(outputId = ns("ord_bray_norm"))),
+            column(4, plotOutput(outputId = ns("ord_jaccard_norm")))
+        ),
+        fluidRow(
+            column(12,
+                   wellPanel(
+                       sliderInput(
+                           inputId = ns("rarefyCount"),
+                           label = "Change Count",
+                           min = 100, max = min(sample_sums(GP3)), step = 50, value = 1000))
             )
+        ),
+        fluidRow(
+            column(6, plotOutput(outputId = ns("unifracUnWeighted"))),
+            column(6, plotOutput(outputId = ns("unifracWeighted")))
         )
-    )
+        #checkboxGroupInput(inputId = ns("groupSelection"), label = "Add Methods", inline = TRUE, choiceNames = c("euclidean", "bray", "jaccard"), choiceValues = c(1,2,3))
     )
 }

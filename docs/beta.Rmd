@@ -1,92 +1,120 @@
 ---
-title: "Alpha Diversities"
+title: "Beta Diversities"
+author: "Stelios Batziakas"
+date: "October 21, 2017"
 output: html_document
 ---
 
-Below are descriptions of common diversity metrics and brief explanations on
-their use, along with some test calculations
+# Beta Diversity measures
 
-Minimal calculations of these metrics will be used with the `esophagus` data
-found in `phyloseq`.
+##  Jensen-Shannon Divergence for comparing pairs of microbial communities
 
-```{r}
-library(phyloseq)
-data("esophagus")
-```
+call Inside Distance argument : "jsd"
+Reference : http://www.math.ku.dk/~topsoe/ISIT2004JSD.pdf
 
-Observed
-========
+If P and Q are rwo discrete propability distributions then Kullbacj - Leibler divergence is
 
-This diversity metric simply calculates the number of non-zero abundant taxa.
+$$D_{kl}(P||Q) = \sum_i P(i) log \frac{P(i)}{Q(i)}   $$
+and the Jensen Shannon Divergence is
+$$JSD(P||Q) = \frac{1}{2}D(P||M) + \frac{1}{2}D(P||M)    $$ where
+$$ M = \frac{1}{2} (P+Q)$$
 
-```{r}
-# Use phyloseq function
-estimate_richness(esophagus, measures = "Observed")
 
-# Confirm with manual calculation
-esoTF <- otu_table(esophagus)
-colSums(esoTF != 0) # Non-zero taxa will be TRUE
-```
+The following distances are calculated through package vegan. Copying from `?vegdist()`:
 
-Chao1
-=====
+The following overview gives first the quantitative version, where x[ij] x[ik] refer to the quantity on species (column) i and sites (rows) j and k. In binary versions A and B are the numbers of species on compared sites, and J is the number of species that occur on both compared sites similarly.
 
-According to original paper, the Chao1 metric is a
 
-> Nonparametric estimation of the number of classes in a population
+euclidean	$$ d[jk] = \sqrt(\sum(x[ij]-x[ik])^2) $$
+binary version: $$\sqrt(A+B-2*J) $$
 
-This metric is defined as
 
-$$S_{est} = S_{obs} + \frac{f_1^2}{2f_2}$$
+manhattan	$$d[jk] = \sum( |{(x[ij] - x[ik])}|)$$
+binary version: $$A+B-2*J$$
 
+
+gower	$$d[jk] = (1/M) \sum|\frac{((x[ij]-x[ik])}{(max(x[i])-min(x[i])))}|$$
+
+binary version: $$\frac{(A+B-2*J)}{M},$$
+where M is the number of columns (excluding missing values)
+
+
+altGower	$$d[jk] = \frac{1}{NZ} \sum |x[ij] - x[ik]|$$
+where NZ is the number of non-zero columns excluding double-zeros (Anderson et al. 2006).
+binary version: $$\frac{(A+B-2*J)}{(A+B-J)}$$
+
+canberra	$$d[jk] = \frac{1}{NZ} \sum \frac{|x[ij]-x[ik]|}{|x[ij]|+ |x[ik]|}$$
+where NZ is the number of non-zero entries.
+binary version: $$\frac{A+B-2*J}{A+B-J}$$
+
+
+bray	$$d[jk] = \frac {\sum |x[ij]-x[ik]|}{\sum x[ij]+x[ik]}$$
+
+binary version: $$\frac{A+B-2*J}{A+B} $$
+
+kulczynski $$	d[jk]= 1 - 0.5*[\sum \frac {min(x[ij],x[ik])}{sum x[ij]} + \sum \frac {min(x[ij],x[ik])}{sum x[ik]}] $$
+binary version: $$ 1- \frac {\frac{J}{A} + \frac{J}{B}}{2} $$
+
+morisita : $$	d[jk] = 1 - 2*\sum \frac{(x[ij]*x[ik])}{lambda[j]+lambda[k]} * \sum(x[ij])*\sum(x[ik])) $$ 
 where
+$$ lambda[j] = \frac {\sum(x[ij]*(x[ij]-1))}{\sum(x[ij])*\sum(x[ij]-1)} $$
+binary version: Is not applicable
 
-- $S_{est}$ is the estimated number of species,
-- $S_{obs}$ is the observed number of species (i.e. number of non-zero taxa),
-- $f_1$ is the number of singletons (i.e. number of taxa occurring only once),
-  and
-- $f_2$ is the number of doubletons (i.e. number of taxa occurring only twice).
+Horn : Is like morisita, but $$lambda[j] = frac{\sum(x[ij]^2)}{(\sum(x[ij])^2)}$$
+binary version: $$ \frac {(A+B-2*J)}{(A+B)} $$
 
-The abstract of the original paper mentions that this metric estimates number of
-classes
+binomial :	$$ d[jk] = \sum(x[ij]*log( \frac{x[ij]}{n[i]}) + x[ik]*log(\frac {x[ik]}{n[i]}) - n[i]*\frac{log(\frac{1}{2})}{n[i]} $$,
+where $$n[i] = x[ij] + x[ik]$$
+binary version: $$ log(2)*(A+B-2*J)$$
 
-> ... when most of the information is concentrated on the low order occupancy
-> numbers. (Chao, 1984)
+cao :  $$	d[jk] = (1/S) * \sum(log(\frac{n[i]}{2}) - (x[ij]*log(x[ik]) + x[ik]*log(\frac{x[ij]))}{n[i]}) $$,
+where S is the number of species in compared sites and n[i] = x[ij] + x[ik]
 
-So this implies you should use this metric if you believe there are low abundant
-taxa involved in your samples.
+jaccard Index : $$ \frac {2B}{(1+B)} $$ , where B is Bray–Curtis dissimilarity.
 
-The potential rationale for weighting more with singletons and doubletons is
-because if you have a lot of singletons, it may suggest that there are more
-unobserved taxa in your population. Thus, having a higher diversity.
+mountford : Is $$ M = \frac{1}{a}$$ where α is the parameter of Fisher's logseries assuming that the compared communities are samples from the same community.  Index M is found as the positive root of equation $$ exp(a*M) + exp(b*M) = 1 + exp((a+b-j)*M) $$,
+where j is the number of species occurring in both communities, and a and b are the number of species in each separate community
 
-**Note**: The `vegan` implementation of the calculation adds in correction
-terms (the `+1` for the doubletons) in case there are no doubletons in your
-sample. Other wise, you'd be dividing by zero. 
+Raup: Raup–Crick dissimilarity  is a probabilistic index based on presence/absence data. It is defined as 1 - prob(j), or based on the probability of observing at least j species in shared in compared communities. See vegdist() for details.
 
-```{r}
-# Use phyloseq function
-estimate_richness(esophagus, measures = "Chao1")
-estimateR(t(otu_table(esophagus)), "chao")["S.chao1", ] # Function used in vegan
+Chao:  A Jaccard type index defined as
+$$d[jk] = 1 - U[j]*U[k]/(U[j] + U[k] - U[j]*U[k])$$,
+where $$U[j] = \frac{C[j]}{N[j]} + \frac {(N[k] -1)}{N[k]} * \frac{a1}{(2*a2)} * \frac {S[j]}{N[j]}$$,
+and similarly for U[k]. Here C[j] is the total number of individuals in the species of site j that are shared with site k, N[j] is the total number of individuals at site j, a1 (and a2) are the number of species occurring in site j that have only one (or two) individuals in site k, and S[j] is the total number of individuals in the species present at site j that occur with only one individual in site k.
 
-# Confirm with manual calculation
-chao1 <- function(otu) {
-    temptable <- otu_table(otu)
-    singletons <- colSums(temptable == 1) # Number of singletons
-    doubletons <- colSums(temptable == 2) # Number of doubletons
-    obs <- colSums(temptable != 0) # Observed number of non-zero taxa
+The following Indices are from `vegan::betadiver()`. They use the following notation:
 
-    # Chao1 calculation
-    obs + (singletons * (singletons - 1)) / (2 * (doubletons + 1))
-}
-chao1(otu_table(esophagus))
-```
+> "Component a comprises the total number of species that occur in both quadrats, component b comprises the total number of species that occur in the neighbouring quadrat but not in the focal one, component c comprises the total number of species that occur in the focal quadrat but not in the neighbouring one." The previous definition comes from "Measuring beta diversity for presence–absence data" (Koleff,Gaston & Lannon,2013)
 
-**References**
 
-Chao, Anne. "Nonparametric estimation of the number of classes in a population." Scandinavian Journal of statistics (1984): 265-270. URL: http://www.jstor.org/stable/4615964
+"w" :$$  \frac {b+c}{2*a+b+c}$$
+"-1" $$ \frac{(b+c)}{(2*a+b+c)}$$
+ "c" = $$\frac{(b+c)}{2}$$
+"wb" = $$ b+c $$
+"r" = $$ \frac{2*b*c}{((a+b+c)^2-2*b*c)} $$
+"I" = $$log(2*a+b+c) - \frac{2*a*log(2)}{(2*a+b+c)} - ((a+b)*log(a+b) + \frac {(a+c)*log(a+c)} {(2*a+b+c)}) $$
+"e" = $$ e^{(log(2*a+b+c)} - 2*a*\frac{log(2)}{(2*a+b+c)} - (\frac{(a+b)*log(a+b) + (a+c)*log(a+c))}
+{(2*a+b+c))}-1 $$
+"t" =  $$\frac{(b+c)}{(2*a+b+c)} $$
+"me" = $$ \frac {(b+c)}{(2*a+b+c)} $$
+"j" = $$ \frac{a}{(a+b+c)} $$
+"sor" =  $$ \frac {2*a}{(2*a+b+c)}$$
+"m" =  $$\frac {(2*a+b+c)*(b+c)}{(a+b+c)} $$
+"-2" = $$ \frac {pmin(b,c)}{(pmax(b,c)+a)} $$
+"co" =$$ \frac {(a*c+a*b+2*b*c)}{(2*(a+b)*(a+c))} $$
+"cc" = $$ \frac {(b+c)}{(a+b+c)} $$
+"g" = $$\frac{(b+c)}{(a+b+c)}$$
+"-3" = $$ \frac {pmin(b,c)}{(a+b+c)} $$
+"l" = $$ \frac {(b+c)}{2} $$
+"hk" = $$ \frac {(b+c)}{(2*a+b+c)} $$
+"rlb" = $$\frac {a}{(a+c)} $$
+"sim" = $$ \frac{pmin(b,c)}{(pmin(b,c)+a)}$$
+"gl" = $$ \frac {2*abs(b-c)}{(2*a+b+c)}$$
+"z" = $$\frac{(log(2)-log(2*a+b+c)+log(a+b+c))}{log(2)}$$
 
-Chao1 calculation in the `estimateR()` function within `vegan`
-URL: https://github.com/vegandevs/vegan/blob/master/R/estimateR.default.R
+Rest of the distances come from stats::distance ()
+maximum:Maximum distance between two components of x and y (supremum norm)
 
-Alpha Diversity http://www.coloss.org/beebook/I/gut-symbionts/2/2/4
+binary:: The vectors are regarded as binary bits, so non-zero elements are ‘on’ and zero elements are ‘off’. The distance is the proportion of bits in which only one is on amongst those in which at least one is on.
+
+minkowski:The p norm, the pth root of the sum of the pth powers of the differences of the components.

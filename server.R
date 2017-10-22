@@ -7,6 +7,7 @@ library(ggplot2)
 library(knitr)
 library(markdown)
 library(phyloseq)
+library(rmarkdown)
 
 # Define server logic and return the server function
 server <- function(input, output) {

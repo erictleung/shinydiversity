@@ -8,7 +8,7 @@ alphaUI <- function(id) {
     # Define the UI for the app
     tagList(
         fluidPage(
-            titlePanel("Alpha Diversiy"),
+            titlePanel("Alpha Diversity"),
 
             # Sidebar layout
             sidebarLayout(

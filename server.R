@@ -8,8 +8,6 @@ library(knitr)
 library(markdown)
 library(phyloseq)
 
-library(phyloseq)
-
 # Define server logic and return the server function
 server <- function(input, output) {
     homeServer <- callModule(homeServer, "homeUI")

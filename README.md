@@ -40,13 +40,13 @@ runGitHub("shinydiversity", "erictleung")
 There are many alpha and beta diversity metrics to analyze microbial ecological
 or microbiome data. Alpha diversity describes an estimate of the total number
 of species in a sample. Beta diversity describes the differences between
-samples. Below are some example of then number of metrics you can use.
+samples. Below are some example of the number of metrics you can use.
 
 <img src="images/alpha_diversities.png" alt="Drawing" style="width: 100%;"/>
 
 ###### Plot from "Alpha diversity graphics" page for phyloseq showing various alpha diversity metrics to choose from http://joey711.github.io/phyloseq/plot_richness-examples
 
-Below is are just a few beta diversity metrics choose from
+Below are just a few beta diversity metrics to choose from
 
 ```R
 > library(phyloseq)
@@ -77,8 +77,8 @@ how will your data affect the calculation of these metrics?
 ## Proposed Project
 
 Create an interactive Shiny application to show changes in your chosen alpha or
-beta diversity metrics to see how each change based on simulated or real data.
+beta diversity metrics to see how each changes based on simulated or real data.
 Some of these metrics are sensitive to single or double counts of species so
 this will be good to see how different distributions of counts will change
-these metrics and your interpretations of them. This should be designed to give
+these metrics and your interpretations of them. The project should be designed to give
 an intuitive understanding of how these metrics work.

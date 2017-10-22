@@ -18,8 +18,12 @@ ui <- navbarPage(
         "Beta",
         betaUI("betaUI")
     ),
-    tabPanel(
-        "Documentation",
-        docsUI("docsUI")
+    navbarMenu("Documentation",
+        tabPanel("Alpha",
+                 docsUI("docsUIalpha")
+        ),
+        tabPanel("Beta",
+                 docsUI("docsUIbeta"))
+
     )
 )

@@ -3,6 +3,7 @@ library(knitr)
 library(markdown)
 library(rmarkdown)
 library(phyloseq)
+library(rmarkdown)
 library(phyloseq); packageVersion("phyloseq")
 library(plyr)
 

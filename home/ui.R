@@ -8,7 +8,6 @@ homeUI <- function(id) {
     # Define the UI for the app
     tagList(
         fluidPage(
-            titlePanel("Home"),
             fluidRow(
                 column(12, includeMarkdown("README.md"))
             )

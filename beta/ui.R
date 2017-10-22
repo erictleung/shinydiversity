@@ -6,28 +6,14 @@ betaUI <- function(id) {
     # NOTE: All referenced input variables must be wrapped with a call to ns(), ex. ns("someInputID")
 
     # Define the UI for the app
-    tagList(
-        fluidPage(
-            titlePanel("Beta Diversiy"),
+    titlePanel("Beta Diversity Metrics"),
+    plotOutput(outputId = "ord"),
 
-            # Sidebar layout
-            sidebarLayout(
+    #these should be to the right
+    plotOutput(outputId = "ord_norm"),
 
-                # Sidebar panel
-                sidebarPanel(
-                    # TODO: Sidebar panel UI logic here
-                    sliderInput(inputId = ns("p"),
-                                label = "Choose a percentage to sparcify",
-                                value = 0.25, min = 0, max = 1)
-                ),
-
-                # Main panel
-                mainPanel(
-                    # TODO: Main  panel UI logic here
-                    plotOutput(outputId = ns("plot")
-                )
-            )
-        )
-    )
-    )
+    sliderInput(inputId = "rarefyCount", label = "Change Count", min = 100, max = min(sample_sums(GP3)), step = 50, value = 1000),
+    #checkboxGroupInput(inputId = "groupSelection", label = "Add Methods", inline = TRUE, choiceNames = c("euclidean", "bray", "jaccard"), choiceValues = c(1,2,3))
+    plotOutput(outputId = "unifracWeighted"),
+    plotOutput(outputId = "unifracUnWeighted")
 }

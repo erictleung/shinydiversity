@@ -9,7 +9,7 @@ homeUI <- function(id) {
     tagList(
         fluidPage(
             fluidRow(
-                column(12, includeMarkdown("README.md"))
+                column(12, includeHTML(render("README.md", "html_document")))
             )
         )
     )

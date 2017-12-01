@@ -1,6 +1,9 @@
 ---
 title: "Alpha Diversities"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 Below are descriptions of common diversity metrics and brief explanations on
@@ -11,8 +14,14 @@ found in `phyloseq`.
 
 ```{r}
 library(phyloseq)
+library(vegan)
 data("esophagus")
 ```
+
+**Table of Contents**
+
+- [Observed](#observed)
+- [Chao1](#chao1)
 
 Observed
 ========

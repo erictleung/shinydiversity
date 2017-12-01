@@ -34,5 +34,5 @@ vignettes/*.pdf
 .Rproj.user
 
 # Ignore compiled Markdown files and figures in documentation
-docs/*.md
+docs/*.html
 figure/

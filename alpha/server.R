@@ -2,12 +2,15 @@
 source("R/sparsify.R")
 
 # Alpha Module Server function
-
 alphaServer <- function(input, output, session) {
     output$phylo <- renderPlot({
         title <- "Alpha Diversity Metrics"
         otuMatrix <- loadOTUMatrix(input$dataSelection)
-        plot_richness(get(input$dataSelection), measures = c("Observed", input$groupSelection), color = "SampleType")
+        if (input$dataSelection == "esophagus") {
+            plot_richness(get(input$dataSelection), measures = c("Observed", input$groupSelection))
+        } else {
+            plot_richness(get(input$dataSelection), measures = c("Observed", input$groupSelection), color = "SampleType")
+        }
     })
 
     output$heatmap <- renderPlot({

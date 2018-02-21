@@ -1,14 +1,13 @@
 ---
 title: "Beta Diversities"
-author: "Stelios Batziakas"
-date: "October 21, 2017"
-output: html_document
+output:
+  html_document:
+    toc: true
 ---
 
-# Beta Diversity measures
+Jensen-Shannon Divergence
+=========================
 
-
-## Jensen-Shannon Divergence
 Jensen-Shannon Divergence for comparing pairs of microbial communities: If P and Q are rwo discrete propability distributions then Kullbach - Leibler divergence is
 
 $$D_{kl}(P||Q) = \sum_i P(i) log \frac{P(i)}{Q(i)}   $$
@@ -16,7 +15,9 @@ and the Jensen Shannon Divergence is
 $$JSD(P||Q) = \frac{1}{2}D(P||M) + \frac{1}{2}D(P||M)    $$ where
 $$ M = \frac{1}{2} (P+Q)$$
 
-## vegan::vegdist() distances
+vegan::vegdist() distances
+==========================
+
 The following distances are calculated through package vegan. Copying from `?vegdist()`:
 
 The following overview gives first the quantitative version, where x[ij] x[ik] refer to the quantity on species (column) i and sites (rows) j and k. In binary versions A and B are the numbers of species on compared sites, and J is the number of species that occur on both compared sites similarly.
@@ -78,7 +79,9 @@ $$U[j] = \frac{C[j]}{N[j]} + \frac {(N[k] -1)}{N[k]} * \frac{a1}{(2*a2)} * \frac
 and similarly for U[k]. Here C[j] is the total number of individuals in the species of site j that are shared with site k, N[j] is the total number of individuals at site j, a1 (and a2) are the number of species occurring in site j that have only one (or two) individuals in site k, and S[j] is the total number of individuals in the species present at site j that occur with only one individual in site k.
 
 
-## Vegan::betadiver() Indices
+vegan::betadiver() Indices
+==========================
+
 The following Indices are from `vegan::betadiver()`. They use the following notation:
 
 > "Component a comprises the total number of species that occur in both quadrats, component b comprises the total number of species that occur in the neighbouring quadrat but not in the focal one, component c comprises the total number of species that occur in the focal quadrat but not in the neighbouring one." The previous definition comes from "Measuring beta diversity for presence–absence data" (Koleff,Gaston & Lannon,2013)
@@ -110,7 +113,9 @@ The following Indices are from `vegan::betadiver()`. They use the following nota
 23. "z" = $$\frac{(log(2)-log(2*a+b+c)+log(a+b+c))}{log(2)}$$
 
 
-## Distances from stats::distance
+Distances from stats::distance
+==============================
+
 Rest of the distances come from stats::distance ().
 
 1. maximum: Maximum distance between two components of x and y (supremum norm)
@@ -124,6 +129,6 @@ Rest of the distances come from stats::distance ().
 
 Anderson, M.J., Ellingsen, K.E. & McArdle, B.H. (2006) , "Multivariate dispersion as a measure of beta diversity". Ecology Letters 9, 683–693.
 
-Bent Fuglede and Flemming Topsoe (2004), "Jensen-Shannon Divergence and Hilbert space embedding." . International Symposium on Information Theory, 2004. ISIT 2004,  DOI: 10.1109/ISIT.2004.1365067  
- 
+Bent Fuglede and Flemming Topsoe (2004), "Jensen-Shannon Divergence and Hilbert space embedding." International Symposium on Information Theory, 2004. ISIT 2004,  DOI: 10.1109/ISIT.2004.1365067
+
 Patricia Koleff,Kevin J. Gaston and Jack J. Lennon (2003), "Measuring beta diversity for presence–absence data", Animal Ecology Volume 72, Issue 3 , DOI: 10.1046/j.1365-2656.2003.00710.x

@@ -11,6 +11,7 @@ Interactive application to explore various ecological diversity metrics
 - [Prerequisites for Local Development](#prerequisites-for-local-development)
 - [Problem](#problem)
 - [Proposed Project](#proposed-project)
+- [Acknowledgements](#acknowledgements)
 
 ## To Run
 
@@ -82,3 +83,17 @@ Some of these metrics are sensitive to single or double counts of species so
 this will be good to see how different distributions of counts will change
 these metrics and your interpretations of them. The project should be designed to give
 an intuitive understanding of how these metrics work.
+
+## Acknowledgements
+
+This project was initiated as a selected project at genomics hackathon
+[hackseq](https://www.hackseq.com/) in 2017.
+
+Key developers in coding and brainstorming during the hackathon are:
+
+- [Eric Leung](https://github.com/erictleung)
+- [Roshan Noronha](https://github.com/roshannoronha)
+- [Ali Mirza](https://github.com/aimirza)
+- [Akiff Manji](https://github.com/amanji)
+- Reva Shenwai
+- [Stelios Batziakas](https://github.com/ampatzia)

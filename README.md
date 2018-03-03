@@ -33,8 +33,23 @@ runGitHub("shinydiversity", "erictleung")
 
 **R Packages**
 
-- `shiny` R package (http://shiny.rstudio.com/)
-- `phyloseq` R package (http://joey711.github.io/phyloseq/)
+- `shiny` (http://shiny.rstudio.com/)
+- `phyloseq` (http://joey711.github.io/phyloseq/)
+- `ggplot2` (ggplot2.tidyverse.org)
+- `knitr` (https://yihui.name/knitr/)
+- `markdown` (https://cran.r-project.org/package=markdown)
+- `rmarkdown` (https://rmarkdown.rstudio.com/)
+- `plyr` (http://had.co.nz/plyr/)
+
+```R
+# Install prerequisite R packages
+pkgs <- c("shiny", "ggplot2", "knitr", "markdown" , "rmarkdown", "plyr")
+install.packages(pkgs)
+
+# Try http:// if https:// URLs are not supported
+source("https://bioconductor.org/biocLite.R")
+biocLite('phyloseq')
+```
 
 ## Problem
 

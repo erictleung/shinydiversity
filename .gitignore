@@ -36,3 +36,6 @@ vignettes/*.pdf
 # Ignore compiled Markdown files and figures in documentation
 docs/*.html
 figure/
+
+# Ignore rsconnect
+rsconnect/

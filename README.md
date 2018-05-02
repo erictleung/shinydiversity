@@ -12,7 +12,9 @@ Interactive application to explore various ecological diversity metrics
 - [Prerequisites for Local Development](#prerequisites-for-local-development)
 - [Problem](#problem)
 - [Proposed Project](#proposed-project)
+- [More Comprehensive Tools](#more-comprehensive-tools)
 - [Acknowledgements](#acknowledgements)
+
 
 ## To Run
 
@@ -24,6 +26,7 @@ install.packages("shiny")
 library(shiny)
 runGitHub("shinydiversity", "erictleung")
 ```
+
 
 ## Prerequisites for Local Development
 
@@ -52,12 +55,17 @@ source("https://bioconductor.org/biocLite.R")
 biocLite('phyloseq')
 ```
 
+
 ## Problem
 
 There are many alpha and beta diversity metrics to analyze microbial ecological
-or microbiome data. Alpha diversity describes an estimate of the total number
-of species in a sample. Beta diversity describes the differences between
-samples. Below are some example of the number of metrics you can use.
+or microbiome data. Although there are other more comprehensive tools to
+analyze microbial data, each of them assumes sufficient amount of knowledge on
+the differences among the diversity indices and how underlying assumptions of
+the indices may interpret your data in unexpected ways. Alpha diversity
+describes an estimate of the total number of species in a sample. Beta
+diversity describes the differences between samples. Below are some example of
+the number of metrics you can use.
 
 <img src="images/alpha_diversities.png" alt="Drawing" style="width: 100%;"/>
 
@@ -91,6 +99,7 @@ Below are just a few beta diversity metrics to choose from
 With so many metrics to choose from, how do you know which is the "best" and
 how will your data affect the calculation of these metrics?
 
+
 ## Proposed Project
 
 Create an interactive Shiny application to show changes in your chosen alpha or
@@ -99,6 +108,41 @@ Some of these metrics are sensitive to single or double counts of species so
 this will be good to see how different distributions of counts will change
 these metrics and your interpretations of them. The project should be designed to give
 an intuitive understanding of how these metrics work.
+
+
+## More Comprehensive Tools
+
+For more comprehensive microbiome data analysis that goes beyond the scope of
+just diversity indices and includes provenance of the analysis, we suggest
+looking at these other tools:
+
+- [Shiny-phyloseq](http://joey711.github.io/shiny-phyloseq/)
+    - McMurdie and Holmes (2014). [Shiny-phyloseq: Web Application for
+      Interactive Microbiome Analysis with Provenance Tracking][shinyphyloseq].
+      Bioinformatics (Oxford, England) 31(2), 282–283.
+    - Comprehensive microbiome analysis and interactive web application using
+      phyloseq and Shiny with provenance tracking in order to reproduce
+      graphically performed analyses.
+- [Dynamic Assessment of Microbial Ecology
+  (DAME)](https://acnc-shinyapps.shinyapps.io/DAME/)
+    - Piccolo, Brian D., et al. [Dynamic Assessment of Microbial Ecology
+      (DAME): A web app for interactive analysis and visualization of microbial
+      sequencing data][dame]. Bioinformatics 1 (2017): 3.
+    - Comprehensive interactive web application to analyze microbial ecology
+      data specifically designed to work directly with output files from the
+      QIIME1 software suite with as minimal file processing as possible.
+- [MicrobiomeAnalyst](http://www.microbiomeanalyst.ca/)
+    - Dhariwal, Achal, et al. [MicrobiomeAnalyst: a web-based tool for
+      comprehensive statistical, visual and meta-analysis of microbiome
+      data][microbiomeanalyst]. Nucleic acids research (2017): gkx295.
+    - Comprehensive statistical, visual and meta-analysis of microbiome data of
+      various kinds: 16S rRNA, shotgun metagenomics, taxon set enrichment
+      analysis.
+
+[shinyphyloseq]: https://doi.org/10.1093/bioinformatics/btu616
+[dame]: https://doi.org/10.1093/bioinformatics/btx686
+[microbiomeanalyst]: https://doi.org/10.1093/nar/gkx295
+
 
 ## Acknowledgements
 
